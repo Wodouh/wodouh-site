@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>سياسة الخصوصية | وضوح</title>
+<meta name="description" content="سياسة الخصوصية لمنصة وضوح: ما البيانات التي نجمعها، ولماذا، وكيف نحميها، وحقوقك.">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#172126">
+<meta property="og:site_name" content="وضوح">
+<meta property="og:image" content="https://wodouh.com/og-image.png">
+<meta property="og:locale" content="ar_SA">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:title" content="سياسة الخصوصية | وضوح">
+<meta property="og:description" content="سياسة الخصوصية لمنصة وضوح: ما البيانات التي نجمعها، ولماذا، وكيف نحميها، وحقوقك.">
+<meta property="og:url" content="https://wodouh.com/privacy.html">
+<link rel="canonical" href="https://wodouh.com/privacy.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Noto+Kufi+Arabic:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #FAFAF7;
+    --ink: #172126;
+    --muted: #66747A;
+    --green: #087F73;
+    --mist: #E8F2F0;
+    --line: #DDE4E2;
+    --mark: #FFF3C4;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #111A1E;
+      --ink: #EEF2F1;
+      --muted: #9AA8AC;
+      --green: #3FB3A5;
+      --mist: #16292A;
+      --line: #26363A;
+      --mark: #4A4020;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "IBM Plex Sans Arabic", "Segoe UI", Tahoma, sans-serif;
+    font-size: 17px;
+    line-height: 1.95;
+  }
+  a { color: var(--green); }
+  a:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; border-radius: 2px; }
+  mark { background: var(--mark); color: inherit; padding: 0 .2em; border-radius: 3px; }
+
+  header {
+    border-bottom: 1px solid var(--line);
+  }
+  .bar {
+    max-width: 1080px; margin: 0 auto; padding: 18px 24px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .brand { font-weight: 600; font-size: 20px; color: var(--ink); text-decoration: none; }
+  .brand span { color: var(--muted); font-weight: 400; font-size: 15px; margin-inline-start: 8px; }
+  .bar nav a { color: var(--muted); text-decoration: none; font-size: 15px; margin-inline-start: 20px; }
+  .bar nav a:hover { color: var(--ink); }
+
+  .wrap {
+    max-width: 1080px; margin: 0 auto; padding: 48px 24px 96px;
+    display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 56px;
+  }
+  aside { position: sticky; top: 24px; align-self: start; font-size: 14.5px; line-height: 1.7; }
+  aside p { color: var(--muted); margin: 0 0 10px; }
+  aside ol { list-style: none; margin: 0; padding: 0; }
+  aside li { margin: 0 0 6px; }
+  aside a { color: var(--muted); text-decoration: none; }
+  aside a:hover { color: var(--ink); }
+
+  main { max-width: 68ch; }
+  h1, h2, .brand { font-family: "Noto Kufi Arabic", "IBM Plex Sans Arabic", Tahoma, sans-serif; }
+  h1 { font-size: 38px; line-height: 1.35; font-weight: 600; margin: 0 0 8px; }
+  .meta { color: var(--muted); font-size: 15px; margin: 0 0 36px; }
+
+  .glance {
+    background: var(--mist);
+    border-inline-start: 4px solid var(--green);
+    padding: 22px 26px;
+    margin: 0 0 48px;
+    border-radius: 0 8px 8px 0;
+  }
+  .glance h2 { font-size: 19px; margin: 0 0 10px; }
+  .glance ul { margin: 0; padding-inline-start: 20px; }
+  .glance li { margin: 0 0 4px; }
+
+  section { padding-top: 8px; margin-bottom: 36px; }
+  h2 { font-size: 23px; font-weight: 600; line-height: 1.5; margin: 0 0 12px; }
+  h3 { font-size: 18px; font-weight: 600; margin: 20px 0 6px; }
+  p { margin: 0 0 14px; }
+  ul { margin: 0 0 14px; padding-inline-start: 22px; }
+  li { margin-bottom: 6px; }
+  .en { direction: ltr; text-align: left; font-family: "Segoe UI", Arial, sans-serif; font-size: 15.5px; line-height: 1.7; background: var(--mist); padding: 14px 18px; border-radius: 6px; }
+
+  footer { border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+  footer .bar { justify-content: space-between; }
+
+  @media (max-width: 820px) {
+    .wrap { grid-template-columns: 1fr; gap: 24px; padding-top: 32px; }
+    aside { position: static; border-bottom: 1px solid var(--line); padding-bottom: 18px; }
+    aside ol { columns: 2; column-gap: 20px; }
+    h1 { font-size: 30px; }
+    body { font-size: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="bar">
+    <a class="brand" href="/" style="display:flex;align-items:center;gap:10px"><img src="/icon-192.png" alt="" width="28" height="28" style="border-radius:6px">وضوح <span>Wodouh</span></a>
+    <nav>
+      <a href="/">الرئيسية</a>
+      <a href="/privacy.html" aria-current="page">الخصوصية</a>
+      <a href="/terms.html">الشروط</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <aside aria-label="محتويات الصفحة">
+    <p>في هذه الصفحة</p>
+    <ol>
+      <li><a href="#who">من نحن</a></li>
+      <li><a href="#collect">ما نجمعه</a></li>
+      <li><a href="#why">لماذا نجمعه</a></li>
+      <li><a href="#connectors">ربط الحسابات</a></li>
+      <li><a href="#ai">الذكاء الاصطناعي</a></li>
+      <li><a href="#share">مع من نشاركه</a></li>
+      <li><a href="#protect">كيف نحميه</a></li>
+      <li><a href="#keep">مدة الاحتفاظ</a></li>
+      <li><a href="#rights">حقوقك</a></li>
+      <li><a href="#cookies">ملفات الارتباط</a></li>
+      <li><a href="#changes">التحديثات والتواصل</a></li>
+    </ol>
+  </aside>
+
+  <main>
+    <h1>سياسة الخصوصية</h1>
+    <p class="meta">آخر تحديث: 25 سبتمبر 2026</p>
+
+    <div class="glance">
+      <h2>باختصار</h2>
+      <ul>
+        <li>نجمع فقط ما نحتاجه لنفهم شركتك ونساعدك تتخذ قرارات أوضح.</li>
+        <li>بيانات كل شركة معزولة عن غيرها، ولا يراها إلا من تمنحه الصلاحية.</li>
+        <li>لا نبيع بياناتك، ولا نستخدمها للإعلانات.</li>
+        <li>ربط حساباتك اختياري، وتقدر تلغيه في أي وقت.</li>
+        <li>تقدر تطلب نسخة من بياناتك أو حذفها متى شئت.</li>
+      </ul>
+    </div>
+
+    <section id="who">
+      <h2>من نحن</h2>
+      <p>وضوح منصة تساعد الشركات على فهم وضعها، وتحديد أولوياتها، وتحويل قراراتها إلى خطوات قابلة للقياس. تُشغّل المنصة مؤسسة أثر مشرق، الرقم الوطني الموحد 7051112410، ومقرها المدينة المنورة، المملكة العربية السعودية، ويُشار إليها في هذه السياسة بـ«وضوح» أو «نحن».</p>
+      <p>تنطبق هذه السياسة على موقع wodouh.com ومنصة وضوح وكل الخدمات المرتبطة بهما، وتُفسَّر وفق نظام حماية البيانات الشخصية في المملكة العربية السعودية ولوائحه.</p>
+    </section>
+
+    <section id="collect">
+      <h2>ما البيانات التي نجمعها</h2>
+      <h3>بيانات الحساب</h3>
+      <p>الاسم، والبريد الإلكتروني، وبيانات تسجيل الدخول التي يديرها مزود خدمة الهوية لدينا.</p>
+      <h3>بيانات الشركة</h3>
+      <p>ما تدخله أنت عن شركتك: نشاطها، وأهدافها، وتحدياتها، وإجاباتك على أسئلة التعريف، والقرارات والخطط والمهام التي تنشئها داخل المنصة.</p>
+      <h3>المحتوى والملفات</h3>
+      <p>الملفات والمستندات التي ترفعها إلى مركز المعرفة، والمقالات والمحتوى الذي تنشئه أو تعدّله.</p>
+      <h3>بيانات الحسابات المربوطة</h3>
+      <p>إذا اخترت ربط حساب خارجي، نقرأ البيانات التي تسمح بها الصلاحيات التي وافقت عليها فقط. التفاصيل في قسم <a href="#connectors">ربط الحسابات</a>.</p>
+      <h3>بيانات الاستخدام والبيانات التقنية</h3>
+      <p>سجلات الدخول والعمليات، ونوع المتصفح والجهاز، وعنوان IP، وسجلات الأخطاء. نستخدمها لتشغيل الخدمة وحمايتها.</p>
+    </section>
+
+    <section id="why">
+      <h2>لماذا نجمعها</h2>
+      <ul>
+        <li>تقديم الخدمة وتشغيل حسابك وحساب شركتك.</li>
+        <li>تحليل وضع شركتك وتقديم تصورات وتوصيات وخطط مبنية على بياناتها.</li>
+        <li>قياس نتائج ما تنفذه عبر المنصة.</li>
+        <li>حماية المنصة ومنع إساءة الاستخدام.</li>
+        <li>الرد على استفساراتك وطلبات الدعم.</li>
+        <li>تحسين المنصة وتطوير خدماتها، باستخدام بيانات مجمّعة لا تكشف هوية شركة بعينها.</li>
+        <li>الالتزام بالأنظمة والمتطلبات القانونية.</li>
+      </ul>
+      <p>نعالج بياناتك بناءً على تنفيذ اتفاقيتنا معك، وعلى موافقتك عند ربط الحسابات، وعلى مصلحتنا المشروعة في حماية الخدمة وتحسينها، وعلى المتطلبات النظامية.</p>
+    </section>
+
+    <section id="connectors">
+      <h2>ربط الحسابات الخارجية</h2>
+      <p>تتيح لك وضوح ربط حسابات شركتك في منصات أخرى، مثل متجرك في سلة، أو Google Search Console، أو Google Analytics. عند الربط:</p>
+      <ul>
+        <li>تظهر لك صفحة من المنصة الأخرى توضح الصلاحيات المطلوبة، ولا يتم الربط إلا بموافقتك.</li>
+        <li>نطلب أقل صلاحيات ممكنة، ونفضّل صلاحيات القراءة فقط.</li>
+        <li>لا ننشر أو نعدّل أي شيء في حساباتك إلا بعد اعتمادك الصريح داخل المنصة.</li>
+        <li>نحفظ مفاتيح الربط مشفّرة، ولا نطلع على كلمات مرورك إطلاقًا.</li>
+        <li>تستطيع إلغاء الربط في أي وقت من داخل المنصة أو من إعدادات المنصة الأخرى.</li>
+      </ul>
+      <h3>بيانات Google</h3>
+      <p>يلتزم استخدام وضوح للمعلومات التي نستلمها من Google، ونقلها إلى أي تطبيق آخر، بسياسة بيانات المستخدم لخدمات Google API، بما في ذلك متطلبات الاستخدام المحدود.</p>
+      <p class="en">Wodouh's use and transfer to any other app of information received from Google APIs will adhere to the <a href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services User Data Policy</a>, including the Limited Use requirements.</p>
+    </section>
+
+    <section id="ai">
+      <h2>الذكاء الاصطناعي</h2>
+      <p>نستخدم نماذج ذكاء اصطناعي من مزودين خارجيين لتحليل بيانات شركتك وصياغة التوصيات والمحتوى. عند ذلك:</p>
+      <ul>
+        <li>نرسل للنموذج ما يلزم للمهمة المطلوبة فقط، ضمن نطاق شركتك.</li>
+        <li>نختار مزودين تلتزم شروطهم بحماية بيانات العملاء، ونرسل لهم أقل قدر ممكن من البيانات.</li>
+        <li>مخرجات الذكاء الاصطناعي اقتراحات، والقرار النهائي لك دائمًا.</li>
+      </ul>
+    </section>
+
+    <section id="share">
+      <h2>مع من نشارك بياناتك</h2>
+      <p>لا نبيع بياناتك ولا نؤجرها ولا نستخدمها للإعلانات. نشاركها فقط مع:</p>
+      <ul>
+        <li><strong>مزودي الخدمة</strong> الذين نعتمد عليهم لتشغيل المنصة: الاستضافة وقواعد البيانات، وإدارة الهوية وتسجيل الدخول، ومعالجة الذكاء الاصطناعي، والبريد الإلكتروني. يلتزمون بمعالجة البيانات لأغراض تقديم الخدمة فقط.</li>
+        <li><strong>أعضاء فريق شركتك</strong> الذين تمنحهم صلاحية الوصول.</li>
+        <li><strong>الجهات الرسمية</strong> عندما يفرض النظام ذلك.</li>
+        <li><strong>أي جهة تستحوذ على المنصة</strong> في حال الاندماج أو البيع، مع استمرار حماية بياناتك وفق هذه السياسة وإشعارك مسبقًا.</li>
+      </ul>
+      <p>قد يستضيف بعض مزودي الخدمة البيانات خارج المملكة العربية السعودية. في هذه الحالة نلتزم بالضوابط النظامية لنقل البيانات خارج المملكة.</p>
+    </section>
+
+    <section id="protect">
+      <h2>كيف نحمي بياناتك</h2>
+      <ul>
+        <li>عزل بيانات كل شركة عن غيرها على مستوى قاعدة البيانات والصلاحيات.</li>
+        <li>تشفير الاتصال بين متصفحك والمنصة، وتشفير مفاتيح الربط.</li>
+        <li>صلاحيات وصول داخلية محدودة، وسجلات تدقيق للعمليات الحساسة.</li>
+        <li>نسخ احتياطية دورية.</li>
+      </ul>
+      <p>لا يوجد نظام آمن بشكل مطلق، لكننا نعمل باستمرار على تقليل المخاطر. وإذا وقع حادث يمس بياناتك، نبلغك ونبلغ الجهات المختصة وفق ما يفرضه النظام.</p>
+    </section>
+
+    <section id="keep">
+      <h2>مدة الاحتفاظ بالبيانات</h2>
+      <p>نحتفظ ببياناتك ما دام حسابك نشطًا. عند طلبك حذف الحساب، نحذف بياناتك أو نجعلها غير قابلة للربط بك خلال 30 يومًا، وتُحذف من النسخ الاحتياطية خلال 90 يومًا، إلا ما يلزمنا النظام بالاحتفاظ به لمدة أطول.</p>
+    </section>
+
+    <section id="rights">
+      <h2>حقوقك</h2>
+      <p>وفق نظام حماية البيانات الشخصية، لك الحق في:</p>
+      <ul>
+        <li>معرفة كيف نجمع بياناتك ونعالجها.</li>
+        <li>الوصول إلى بياناتك والحصول على نسخة منها.</li>
+        <li>تصحيح بياناتك أو تحديثها.</li>
+        <li>طلب حذف بياناتك.</li>
+        <li>سحب موافقتك في أي وقت، ومنها إلغاء ربط الحسابات.</li>
+      </ul>
+      <p>لممارسة أي من هذه الحقوق، راسلنا على <a href="mailto:support@wodouh.com">support@wodouh.com</a>، ونرد خلال 30 يومًا. قد نطلب التحقق من هويتك قبل تنفيذ الطلب. ولك الحق في تقديم شكوى إلى الجهة المختصة بحماية البيانات الشخصية في المملكة.</p>
+    </section>
+
+    <section id="cookies">
+      <h2>ملفات الارتباط</h2>
+      <p>نستخدم ملفات الارتباط الضرورية فقط لتسجيل الدخول وحماية الجلسة وحفظ تفضيلاتك. إذا أضفنا لاحقًا أدوات تحليل أو ملفات غير ضرورية، سنطلب موافقتك قبل تفعيلها.</p>
+    </section>
+
+    <section id="changes">
+      <h2>التحديثات والتواصل</h2>
+      <p>قد نحدّث هذه السياسة من وقت لآخر. عند أي تغيير جوهري نبلغك عبر البريد أو داخل المنصة قبل سريانه، ونحدّث تاريخ «آخر تحديث» أعلى الصفحة.</p>
+      <p>لأي سؤال عن الخصوصية: <a href="mailto:support@wodouh.com">support@wodouh.com</a></p>
+      <p>المنصة غير موجّهة لمن هم دون 18 عامًا.</p>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <div class="bar">
+    <span>© 2026 وضوح</span>
+    <span><a href="/terms.html">شروط الاستخدام</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
