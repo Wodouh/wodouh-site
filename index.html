@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>وضوح | اعرف ما تحتاجه شركتك الآن</title>
-<meta name="description" content="وضوح يقرأ أرقام شركتك، ويحدد لك الأهم، ويساعدك على تنفيذه وقياس نتيجته.">
+<title>وضوح | اعرف أين يضيع مالك وخذ قرارك بالدليل</title>
+<meta name="description" content="قل لنا وش صاير في نشاطك، ونوصلك لخطوة واحدة واضحة تنفذها وتقيس أثرها.">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#172126">
@@ -12,8 +12,8 @@
 <meta property="og:image" content="https://wodouh.com/og-image.png">
 <meta property="og:locale" content="ar_SA">
 <meta name="twitter:card" content="summary_large_image">
-<meta property="og:title" content="وضوح | اعرف ما تحتاجه شركتك الآن">
-<meta property="og:description" content="وضوح يقرأ أرقام شركتك، ويحدد لك الأهم، ويساعدك على تنفيذه وقياس نتيجته.">
+<meta property="og:title" content="وضوح | اعرف أين يضيع مالك وخذ قرارك بالدليل">
+<meta property="og:description" content="قل لنا وش صاير في نشاطك، ونوصلك لخطوة واحدة واضحة تنفذها وتقيس أثرها.">
 <meta property="og:url" content="https://wodouh.com/">
 <link rel="canonical" href="https://wodouh.com/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -118,6 +118,41 @@
     h2 { font-size: 25px; }
     header nav a:not(.keep) { display: none; }
   }
+
+  /* إعادة ترتيب الرئيسية */
+  h1, h2, h3 { font-family: "Noto Kufi Arabic", "IBM Plex Sans Arabic", sans-serif; }
+  header { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--paper) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  header nav { display: flex; align-items: center; gap: 22px; }
+  header nav a { margin-inline-start: 0; }
+  .btn.small { padding: 8px 18px; font-size: 15px; color: #fff; }
+  @media (prefers-color-scheme: dark) { .btn.small { color: #0E1A15; } }
+  .eyebrow { display: inline-block; color: var(--green); font-weight: 600; font-size: 15px; margin-bottom: 14px; }
+  .hero h1 span { color: var(--green); }
+  .hero p { max-width: 40ch; }
+  .lead { color: var(--muted); font-size: 18px; margin: -14px 0 28px; max-width: 56ch; }
+  .situations { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .situation { display: block; border: 1px solid var(--line); background: var(--card); border-radius: 12px; padding: 18px 20px; color: var(--ink); text-decoration: none; font-weight: 600; font-size: 17px; line-height: 1.6; transition: border-color .15s, transform .15s; }
+  .situation span { display: block; font-weight: 400; font-size: 14px; color: var(--muted); margin-top: 4px; }
+  .situation:hover { border-color: var(--green); transform: translateY(-2px); }
+  .gets { grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .gets li { border: 1px solid var(--line); border-radius: 12px; background: var(--card); padding: 20px; }
+  .gets h3 { margin-bottom: 6px; }
+  .gets p { font-size: 15px; line-height: 1.8; }
+  .links.two { grid-template-columns: repeat(2, 1fr); }
+  a.link { text-decoration: none; color: inherit; }
+  a.link:hover { border-color: var(--green); }
+  .final { background: var(--ink); color: var(--paper); border-radius: 18px; padding: 44px 40px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px; }
+  .final h2 { margin: 0 0 6px; color: var(--paper); }
+  .final p { margin: 0; color: color-mix(in srgb, var(--paper) 72%, transparent); }
+  .contact-line { margin-top: 22px; color: var(--muted); font-size: 15px; }
+  .contact-line a { margin-inline-start: 14px; }
+  @media (max-width: 860px) {
+    .situations, .gets { grid-template-columns: 1fr 1fr; }
+    .links.two { grid-template-columns: 1fr; }
+    .final { padding: 30px 24px; }
+    header nav { gap: 14px; }
+  }
+  @media (max-width: 520px) { .situations, .gets { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -130,10 +165,9 @@
     </a>
     <nav>
       <a href="#how">كيف يعمل</a>
-      <a href="#links">من أين نأخذ أرقامك</a>
       <a href="/knowledge/">المعرفة</a>
-      <a href="#contact">تواصل معنا</a>
       <a class="keep" href="https://app.wodouh.com/sign-in">دخول</a>
+      <a class="keep btn small" href="https://app.wodouh.com/join">ابدأ الآن</a>
     </nav>
   </div>
 </header>
@@ -141,37 +175,59 @@
 <main>
   <div class="container hero">
     <div>
-      <h1>اعرف ما تحتاجه شركتك الآن</h1>
-      <p>وضوح يقرأ أرقام شركتك، ويحدد لك الأهم، ويساعدك على تنفيذه وقياس نتيجته.</p>
+      <span class="eyebrow">قرار واحد بالدليل، من واقع نشاطك</span>
+      <h1>اعرف أين يضيع مالك، <span>وخذ قرارك بالدليل</span></h1>
+      <p>قل لنا وش صاير في نشاطك، ونوصلك لخطوة واحدة واضحة تنفذها وتقيس أثرها.</p>
       <a class="btn" href="https://app.wodouh.com/join">ابدأ الآن</a>
-      <span class="btn-note">تسجّل بنفسك وتبدأ مباشرة</span>
+      <span class="btn-note">تسجّل بنفسك، وتبدأ بسؤال واحد. بلا تحضير.</span>
     </div>
 
     <div class="sample" aria-label="مثال لما يصلك من وضوح">
       <small>مثال لما يصلك</small>
-      <h3>ملاحظة مهمة</h3>
-      <p>أغلب زوار متجرك يأتون من الجوال، لكن قليلًا منهم يكمل الطلب.</p>
+      <h3>وش صاير</h3>
+      <p>الناس تسأل كثيرًا، والبيع قليل.</p>
       <div class="row">
-        <h3>الخطوة المقترحة</h3>
-        <p>بسّط صفحة الدفع على الجوال، وقِس النتيجة بعد أسبوعين.</p>
+        <h3>السبب المرجّح</h3>
+        <p>أغلب من يسأل لا يصله رد ثانٍ بعد أول تواصل.</p>
+      </div>
+      <div class="row">
+        <h3>خطوتك الآن</h3>
+        <p>تابع كل استفسار خلال 24 ساعة لمدة أسبوعين.</p>
       </div>
       <div class="row">
         <h3>رقم نتابعه</h3>
         <div class="nums">
-          <div><b>1.2٪</b>الآن</div>
-          <div><b>2٪</b>الهدف</div>
+          <div><b>2 من 10</b>يشترون الآن</div>
+          <div><b>4 من 10</b>الهدف</div>
         </div>
       </div>
     </div>
   </div>
 
+  <section class="block" id="situations">
+    <div class="container">
+      <h2>وش صاير في نشاطك؟</h2>
+      <p class="lead">اختر الأقرب لوضعك، ونبدأ منه مباشرة.</p>
+      <div class="situations">
+        <a class="situation" href="https://app.wodouh.com/join">المبيعات نزلت<span>ولا تعرف من أين بدأ النزول</span></a>
+        <a class="situation" href="https://app.wodouh.com/join">المبيعات ما تنمو<span>ثابتة منذ فترة</span></a>
+        <a class="situation" href="https://app.wodouh.com/join">أبيع والربح ضعيف<span>الرقم يكبر ولا يبقى شيء</span></a>
+        <a class="situation" href="https://app.wodouh.com/join">الناس تسأل وما تشتري<span>الاستفسارات كثيرة والبيع قليل</span></a>
+        <a class="situation" href="https://app.wodouh.com/join">العميل ما يرجع<span>يشتري مرة ويختفي</span></a>
+        <a class="situation" href="https://app.wodouh.com/join">التسويق ما يجيب نتيجة<span>تصرف ولا ترى أثرًا</span></a>
+        <a class="situation" href="https://app.wodouh.com/join">كل شيء عليّ<span>النشاط يتوقف إذا غبت</span></a>
+        <a class="situation" href="https://app.wodouh.com/join">أفكر أتوسع<span>فرع أو منتج أو سوق جديد</span></a>
+      </div>
+    </div>
+  </section>
+
   <section class="block" id="how">
     <div class="container">
       <h2>كيف يعمل</h2>
       <ol class="steps">
-        <li><h3>أجب عن أسئلة بسيطة</h3><p>دقيقتان لنفهم شركتك وهدفك.</p></li>
-        <li><h3>أضف أرقامك</h3><p>ملف من نظامك، أو ما تعرفه عن نشاطك.</p></li>
-        <li><h3>استلم أول صورة وخطة</h3><p>ما الأهم، وماذا تفعل، وكيف تقيس.</p></li>
+        <li><h3>اختر موقفك</h3><p>بكلامك أنت: المبيعات نزلت، الربح ضعيف، كل شيء عليّ.</p></li>
+        <li><h3>جاوب سؤالًا واحدًا</h3><p>سؤال يحدد أين المشكلة بالضبط، لا استبيان طويل.</p></li>
+        <li><h3>خذ قرارك وخطوتك</h3><p>أولوية واحدة، وسببها، وخطوة تبدأ بها اليوم.</p></li>
       </ol>
     </div>
   </section>
@@ -180,10 +236,10 @@
     <div class="container">
       <h2>ماذا تحصل عليه</h2>
       <ul class="gets">
-        <li><h3>صورة واضحة عن شركتك</h3><p>أين أنت الآن، وما الذي يعطّلك.</p></li>
-        <li><h3>قرار واحد مهم كل مرة</h3><p>بدل عشرين فكرة لا تعرف من أين تبدأ بها.</p></li>
-        <li><h3>خطوات عملية</h3><p>من يفعل ماذا، ومتى.</p></li>
-        <li><h3>أرقام تتابعها</h3><p>تعرف هل نجح ما فعلته أم لا.</p></li>
+        <li><h3>أولوية واحدة</h3><p>بدل عشرين فكرة لا تعرف من أين تبدأ بها.</p></li>
+        <li><h3>السبب بالدليل</h3><p>لماذا هذه الأولوية، من أرقامك وإجاباتك.</p></li>
+        <li><h3>خطوة تنفذها</h3><p>مهمة واحدة الآن، ثم التي بعدها.</p></li>
+        <li><h3>رقم تقيس به</h3><p>تعرف هل نجح ما فعلته أم لا.</p></li>
       </ul>
     </div>
   </section>
@@ -191,10 +247,23 @@
   <section class="block" id="links">
     <div class="container">
       <h2>من أين نأخذ أرقامك</h2>
-      <div class="links" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
+      <div class="links two">
         <div class="link"><b>إجاباتك</b><span>تبدأ بما تعرفه عن نشاطك، بلا تحضير</span></div>
         <div class="link"><b>ملف من نظامك</b><span>صدّر مبيعاتك أو طلباتك وارفعها كما هي</span></div>
       </div>
+    </div>
+  </section>
+
+  <section class="block" id="knowledge">
+    <div class="container">
+      <h2>اقرأ قبل أن تبدأ</h2>
+      <p class="lead">قواعد قصيرة من تجربة الأنشطة الصغيرة والمتوسطة.</p>
+      <div class="links">
+        <a class="link" href="/knowledge/plt-fin-ref-001/"><b>المبيعات ليست ربحًا</b><span>لماذا يكبر الرقم ولا يبقى في يدك شيء</span></a>
+        <a class="link" href="/knowledge/plt-mkt-ref-001/"><b>الاستفسار الأرخص ليس العميل الأرخص</b><span>كيف تحكم على قناة التسويق</span></a>
+        <a class="link" href="/knowledge/plt-sales-play-001/"><b>قاعدة المتابعة خلال 24 ساعة</b><span>أين تضيع الفرص بعد أول تواصل</span></a>
+      </div>
+      <p class="soon"><a href="/knowledge/">كل المقالات</a></p>
     </div>
   </section>
 
@@ -203,31 +272,24 @@
       <div class="trust">
         <div><h3>بياناتك ملكك</h3><p>نستخدمها لخدمتك فقط، ولا نبيعها.</p></div>
         <div><h3>لا نغيّر شيئًا دون موافقتك</h3><p>أي نشر أو تعديل في حساباتك يحتاج اعتمادك.</p></div>
-        <div><h3>كل شركة معزولة</h3><p>لا يرى بيانات شركتك إلا أنت وفريقك.</p></div>
+        <div><h3>كل نشاط معزول</h3><p>لا يرى بيانات نشاطك إلا أنت وفريقك.</p></div>
       </div>
-    </div>
-  </section>
-
-  <section class="block" id="knowledge">
-    <div class="container">
-      <h2>من مركز المعرفة</h2>
-      <div class="links">
-        <a class="link" href="/knowledge/plt-fin-ref-001/" style="text-decoration:none;color:inherit"><b>المبيعات ليست ربحًا</b><span>لماذا يكبر الرقم ولا يبقى في يدك شيء</span></a>
-        <a class="link" href="/knowledge/plt-mkt-ref-001/" style="text-decoration:none;color:inherit"><b>الاستفسار الأرخص ليس العميل الأرخص</b><span>كيف تحكم على قناة التسويق</span></a>
-        <a class="link" href="/knowledge/plt-sales-play-001/" style="text-decoration:none;color:inherit"><b>قاعدة المتابعة خلال 24 ساعة</b><span>أين تضيع الفرص بعد أول تواصل</span></a>
-      </div>
-      <p class="soon"><a href="/knowledge/">كل المقالات</a></p>
     </div>
   </section>
 
   <section class="block contact" id="contact">
     <div class="container">
-      <h2>تواصل معنا</h2>
-      <p>عندك سؤال قبل أن تبدأ؟ راسلنا.</p>
-      <div class="ways">
-        <a class="btn" href="mailto:hello@wodouh.com?subject=%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%A8%D8%AF%D8%A1%20%D9%85%D8%B9%20%D9%88%D8%B6%D9%88%D8%AD">hello@wodouh.com</a>
-        <a class="ghost" href="https://wa.me/966536005855" rel="noopener">واتساب</a>
+      <div class="final">
+        <div>
+          <h2>ابدأ من موقفك اليوم</h2>
+          <p>سؤال واحد، ثم خطوة واحدة واضحة.</p>
+        </div>
+        <a class="btn" href="https://app.wodouh.com/join">ابدأ الآن</a>
       </div>
+      <p class="contact-line">عندك سؤال قبل أن تبدأ؟
+        <a href="mailto:hello@wodouh.com?subject=%D8%B3%D8%A4%D8%A7%D9%84%20%D8%B9%D9%86%20%D9%88%D8%B6%D9%88%D8%AD">hello@wodouh.com</a>
+        <a href="https://wa.me/966536005855" rel="noopener">واتساب</a>
+      </p>
     </div>
   </section>
 </main>
@@ -235,7 +297,7 @@
 <footer>
   <div class="container">
     <span>© 2026 وضوح، تشغيل مؤسسة أثر مشرق</span>
-    <span><a href="/privacy.html">سياسة الخصوصية</a><a href="/terms.html">شروط الاستخدام</a></span>
+    <span><a href="/knowledge/">المعرفة</a><a href="/privacy.html">سياسة الخصوصية</a><a href="/terms.html">شروط الاستخدام</a></span>
   </div>
 </footer>
 
