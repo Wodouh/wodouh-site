@@ -9,7 +9,29 @@ const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const SITE = "https://wodouh.com";
 const APP = "https://app.wodouh.com";
 const today = new Date().toISOString().slice(0, 10);
-const units = JSON.parse(readFileSync(process.argv[2], "utf8")).map((u) => ({ ...u, excerpt: String(u.excerpt ?? "").replace(/\*\*/g, "") }));
+// المصدر: ملف تصدير من مستودع المنصة، أو رابط واجهة المقالات المنشورة في المنصة.
+const source = process.argv[2];
+const raw = /^https?:\/\//.test(source)
+  ? await (await fetch(source, { headers: { accept: "application/json" }, signal: AbortSignal.timeout(30_000) })).json()
+  : JSON.parse(readFileSync(source, "utf8"));
+const list = Array.isArray(raw) ? raw : raw.items;
+if (!Array.isArray(list) || list.length === 0) {
+  // لا مقالات منشورة أو رد غير متوقع: نُبقي الصفحات الحالية كما هي ولا نحذف شيئًا.
+  console.log("no published articles; keeping current pages");
+  process.exit(0);
+}
+const units = list.map((u) => ({
+  slug: String(u.slug),
+  title: u.seoTitle || u.title,
+  heading: u.title,
+  kind: u.kind ?? "",
+  category: u.category || "عام",
+  excerpt: String(u.metaDescription || u.excerpt || "").replace(/\*\*/g, ""),
+  body: String(u.body ?? ""),
+  author: u.author ?? u.authorName ?? "فريق وضوح",
+  source_public: u.source_public ?? "",
+  modified: (u.updatedAt ?? "").slice(0, 10),
+})).filter((u) => /^[a-z0-9-]+$/.test(u.slug) && u.body);
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const inline = (s) => esc(s).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
 
@@ -119,18 +141,18 @@ for (const unit of units) {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: unit.title,
+    headline: unit.heading,
     description: unit.excerpt,
     inLanguage: "ar",
     author: unit.author === "فريق وضوح" ? { "@type": "Organization", name: "وضوح", url: SITE } : { "@type": "Person", name: unit.author },
     publisher: { "@type": "Organization", name: "وضوح", url: SITE, logo: { "@type": "ImageObject", url: `${SITE}/icon-512.png` } },
     mainEntityOfPage: `${SITE}${path}`,
     articleSection: unit.category,
-    dateModified: today,
+    dateModified: unit.modified || today,
   };
   const html = head(`${unit.title} | وضوح`, unit.excerpt, path, `<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>`) + `<main class="container article">
-  <p class="crumbs"><a href="/knowledge/">المعرفة</a> · ${esc(unit.category)} · ${esc(unit.kind)}</p>
-  <h1>${esc(unit.title)}</h1>
+  <p class="crumbs"><a href="/knowledge/">المعرفة</a> · ${esc(unit.category)}${unit.kind ? ` · ${esc(unit.kind)}` : ""}</p>
+  <h1>${esc(unit.heading)}</h1>
   <p class="byline">كتبه: ${esc(unit.author)}${unit.source_public ? ` · ${esc(unit.source_public)}` : ""}</p>
   <article>
 ${markdown(unit.body)}
@@ -140,7 +162,7 @@ ${markdown(unit.body)}
     <p>${esc(ctaText)}</p>
     <a class="btn" href="${APP}/join">ابدأ الآن</a>
   </aside>
-  ${related.length ? `<section class="related"><h2>اقرأ أيضًا</h2><ul>${related.map((r) => `<li><a href="/knowledge/${r.slug}/">${esc(r.title)}</a><span>${esc(r.excerpt)}</span></li>`).join("")}</ul></section>` : ""}
+  ${related.length ? `<section class="related"><h2>اقرأ أيضًا</h2><ul>${related.map((r) => `<li><a href="/knowledge/${r.slug}/">${esc(r.heading)}</a><span>${esc(r.excerpt)}</span></li>`).join("")}</ul></section>` : ""}
 </main>
 ` + foot;
   mkdirSync(join(dir, unit.slug), { recursive: true });
@@ -157,7 +179,7 @@ writeFileSync(join(dir, "index.html"), head("مركز المعرفة | وضوح"
 ${categories.map((c) => `  <section class="cat" id="${esc(c)}">
     <h2>${esc(c)}</h2>
     <div class="cards">
-${units.filter((u) => u.category === c).map((u) => `      <a class="card" href="/knowledge/${u.slug}/"><small>${esc(u.kind)}</small><h3>${esc(u.title)}</h3><p>${esc(u.excerpt)}</p><span>${esc(u.author)}</span></a>`).join("\n")}
+${units.filter((u) => u.category === c).map((u) => `      <a class="card" href="/knowledge/${u.slug}/"><small>${esc(u.kind || u.category)}</small><h3>${esc(u.heading)}</h3><p>${esc(u.excerpt)}</p><span>${esc(u.author)}</span></a>`).join("\n")}
     </div>
   </section>`).join("\n")}
 </main>
@@ -166,7 +188,13 @@ ${units.filter((u) => u.category === c).map((u) => `      <a class="card" href="
 const urls = ["/", "/knowledge/", ...units.map((u) => `/knowledge/${u.slug}/`), "/privacy.html", "/terms.html"];
 writeFileSync(join(root, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls.map((u) => `  <url><loc>${SITE}${u}</loc><lastmod>${u.includes("privacy") || u.includes("terms") ? "2026-09-25" : today}</lastmod></url>`).join("\n")}
+${urls.map((u) => `  <url><loc>${SITE}${u}</loc><lastmod>${u.includes("privacy") || u.includes("terms") ? "2026-09-25" : (units.find((x) => u === `/knowledge/${x.slug}/`)?.modified || today)}</lastmod></url>`).join("\n")}
 </urlset>
 `);
+// شريط «اقرأ قبل أن تبدأ» في الرئيسية: أول ثلاث مقالات منشورة، حتى لا يشير لمقال غير موجود.
+const homePath = join(root, "index.html");
+const home = readFileSync(homePath, "utf8");
+const strip = units.slice(0, 3).map((u) => `        <a class="link" href="/knowledge/${u.slug}/"><b>${esc(u.heading)}</b><span>${esc(u.excerpt.length > 70 ? u.excerpt.slice(0, u.excerpt.lastIndexOf(" ", 70)) + "…" : u.excerpt)}</span></a>`).join("\n");
+const nextHome = home.replace(/(<!-- knowledge:start -->\n)[\s\S]*?(        <!-- knowledge:end -->)/, `$1${strip}\n$2`);
+if (nextHome !== home) writeFileSync(homePath, nextHome);
 console.log(`built ${units.length} articles in ${categories.length} categories`);
