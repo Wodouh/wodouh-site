@@ -1,0 +1,60 @@
+:root{--paper:#FAFAF7;--ink:#172126;--muted:#66747A;--green:#087F73;--green-deep:#06665C;--mist:#E8F2F0;--line:#DDE4E2;--card:#FFFFFF}
+@media (prefers-color-scheme:dark){:root{--paper:#111A1E;--ink:#EEF2F1;--muted:#9AA8AC;--green:#3FB3A5;--green-deep:#6CCBBF;--mist:#16292A;--line:#26363A;--card:#172225}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"IBM Plex Sans Arabic","Segoe UI",Tahoma,sans-serif;font-size:17px;line-height:1.9}
+a{color:var(--green)}
+a:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+.container{max-width:1080px;margin:0 auto;padding:0 24px}
+header .container{display:flex;justify-content:space-between;align-items:center;padding-top:20px;padding-bottom:20px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:22px;color:var(--ink);text-decoration:none}
+header nav{display:flex;align-items:center;gap:22px}
+header nav a{color:var(--muted);text-decoration:none;font-size:15px}
+header nav a:hover{color:var(--ink)}
+.btn{display:inline-block;background:var(--green);color:#fff!important;text-decoration:none;font-weight:600;padding:13px 26px;border-radius:8px}
+.btn:hover{background:var(--green-deep)}
+.btn.small{padding:8px 16px;font-size:15px}
+@media (prefers-color-scheme:dark){.btn{color:#0E1A15!important}}
+h1,h2,h3{font-family:"Noto Kufi Arabic","IBM Plex Sans Arabic",sans-serif;line-height:1.5}
+.intro{padding:40px 0 8px;max-width:720px}
+.intro h1{font-size:40px;margin:0 0 10px}
+.intro p{color:var(--muted);font-size:19px;margin:0 0 22px}
+.cats{display:flex;flex-wrap:wrap;gap:10px}
+.cats a{border:1px solid var(--line);background:var(--card);color:var(--ink);text-decoration:none;padding:6px 16px;border-radius:999px;font-size:15px}
+.cats a:hover{border-color:var(--green)}
+.cat{padding:36px 0;border-top:1px solid var(--line);margin-top:36px}
+.cat h2{font-size:26px;margin:0 0 20px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 22px;color:var(--ink);text-decoration:none}
+.card:hover{border-color:var(--green)}
+.card small{color:var(--green);font-size:13px;font-weight:600}
+.card h3{font-size:19px;margin:6px 0}
+.card p{margin:0 0 14px;color:var(--muted);font-size:15px;line-height:1.8;flex:1}
+.card span{font-size:13px;color:var(--muted)}
+.article{max-width:760px;padding-top:28px;padding-bottom:56px}
+.crumbs{font-size:14px;color:var(--muted);margin:0 0 10px}
+.crumbs a{color:var(--muted)}
+.article h1{font-size:36px;margin:0 0 8px}
+.byline{color:var(--muted);font-size:15px;margin:0 0 28px;padding-bottom:20px;border-bottom:1px solid var(--line)}
+article h2{font-size:23px;margin:34px 0 8px}
+article h3{font-size:19px;margin:24px 0 6px}
+article p{margin:0 0 14px}
+article ul,article ol{margin:0 0 14px;padding-inline-start:24px}
+article li{margin-bottom:6px}
+article blockquote{margin:0 0 14px;padding:12px 18px;background:var(--mist);border-inline-start:3px solid var(--green);border-radius:6px}
+.table{overflow-x:auto;margin:0 0 16px}
+table{border-collapse:collapse;width:100%;font-size:16px;background:var(--card)}
+th,td{border:1px solid var(--line);padding:9px 12px;text-align:start;vertical-align:top}
+th{background:var(--mist);font-weight:600}
+.cta{margin-top:44px;background:var(--mist);border-radius:14px;padding:28px 30px}
+.cta h2{font-size:24px;margin:0 0 6px}
+.cta p{margin:0 0 18px;color:var(--muted)}
+.related{margin-top:44px}
+.related h2{font-size:21px;margin:0 0 12px}
+.related ul{list-style:none;margin:0;padding:0}
+.related li{border-top:1px solid var(--line);padding:14px 0}
+.related a{font-weight:600;text-decoration:none;display:block}
+.related span{color:var(--muted);font-size:15px}
+footer{border-top:1px solid var(--line);color:var(--muted);font-size:14px;margin-top:48px}
+footer .container{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;padding-top:24px;padding-bottom:32px}
+footer a{color:var(--muted);margin-inline-start:18px}
+@media (max-width:860px){.cards{grid-template-columns:1fr}.intro h1{font-size:30px}.article h1{font-size:28px}header nav{gap:14px}header nav a:not(.keep){display:none}}
