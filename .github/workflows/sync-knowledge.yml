@@ -1,0 +1,44 @@
+name: مزامنة مركز المعرفة من المنصة
+
+# كل ساعة: يقرأ المقالات «المنشورة» من المنصة (واجهة عامة، بلا مفاتيح) ويعيد بناء صفحات /knowledge/.
+# النشر والاعتماد يبقيان في لوحة إدارة المنصة؛ هذا السير ينقل ما نُشر فقط.
+on:
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+    inputs:
+      source:
+        description: "رابط واجهة المقالات المنشورة"
+        default: "https://app.wodouh.com/api/public/knowledge"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-knowledge
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Build knowledge pages from published articles
+        env:
+          SOURCE: ${{ inputs.source || 'https://app.wodouh.com/api/public/knowledge' }}
+        run: |
+          # فشل القراءة لا يغيّر شيئًا في الموقع.
+          node tools/build-knowledge.mjs "$SOURCE" || { echo "::warning::تعذرت قراءة المقالات؛ بقي الموقع كما هو"; git checkout -- . ; git clean -fdq knowledge; exit 0; }
+      - name: Commit when something changed
+        run: |
+          # تاريخ اليوم في خريطة الموقع وحده لا يستحق نشرًا جديدًا.
+          if [ -z "$(git status --porcelain -- knowledge index.html)" ]; then git checkout -- sitemap.xml; echo "لا تغيير"; exit 0; fi
+          git config user.name "wodouh-knowledge-sync"
+          git config user.email "hello@wodouh.com"
+          git add knowledge sitemap.xml index.html
+          git commit -m "مزامنة مركز المعرفة من المنصة"
+          git push
