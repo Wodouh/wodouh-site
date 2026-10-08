@@ -21,6 +21,7 @@ if (!Array.isArray(list) || list.length === 0) {
   process.exit(0);
 }
 const units = list.map((u) => ({
+  code: String(u.slug),
   slug: String(u.slug),
   title: u.seoTitle || u.title,
   heading: u.title,
@@ -31,7 +32,32 @@ const units = list.map((u) => ({
   author: u.author ?? u.authorName ?? "فريق وضوح",
   source_public: u.source_public ?? "",
   modified: (u.updatedAt ?? "").slice(0, 10),
-})).filter((u) => /^[a-z0-9-]+$/.test(u.slug) && u.body);
+})).filter((u) => /^[a-z0-9-]+$/.test(u.code) && u.body);
+// روابط مقروءة: رمز المقال في المنصة (مثل plt-fin-ref-001) يقابله رابط بكلمات عربية.
+// الخريطة محفوظة في tools/article-urls.json حتى لا يتغير الرابط إن تغيّر العنوان لاحقًا.
+// مقال جديد بلا رابط يأخذ رابطًا من عنوانه مرة واحدة ويُحفظ في الخريطة.
+const URLS_FILE = join(root, "tools", "article-urls.json");
+const urlMap = JSON.parse(readFileSync(URLS_FILE, "utf8"));
+const READABLE = /^[\u0621-\u064A\u0660-\u0669a-z0-9]+(-[\u0621-\u064A\u0660-\u0669a-z0-9]+)*$/;
+function readableSlug(title) {
+  return String(title)
+    .replace(/[\u064B-\u065F\u0670\u0640]/g, "")          // التشكيل والتطويل
+    .replace(/[^\u0621-\u064A\u0660-\u0669a-zA-Z0-9\s-]/g, " ")
+    .trim().split(/[\s-]+/).filter(Boolean).slice(0, 7).join("-").toLowerCase();
+}
+let mapChanged = false;
+const taken = new Set(Object.values(urlMap));
+for (const unit of units) {
+  if (!READABLE.test(urlMap[unit.code] ?? "")) {
+    let candidate = readableSlug(unit.heading) || unit.code;
+    for (let n = 2; taken.has(candidate); n += 1) candidate = `${readableSlug(unit.heading)}-${n}`;
+    urlMap[unit.code] = candidate; taken.add(candidate); mapChanged = true;
+  }
+  unit.slug = urlMap[unit.code];
+}
+if (mapChanged) writeFileSync(URLS_FILE, JSON.stringify(urlMap, null, 2) + "\n");
+const href = (path) => SITE + encodeURI(path);
+
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const inline = (s) => esc(s).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
 
@@ -91,11 +117,11 @@ const head = (title, description, path, extra = "") => `<!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
-<link rel="canonical" href="${SITE}${path}">
+<link rel="canonical" href="${href(path)}">
 <meta property="og:type" content="article">
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(description)}">
-<meta property="og:url" content="${SITE}${path}">
+<meta property="og:url" content="${href(path)}">
 <meta property="og:image" content="${SITE}/og-image.png">
 <meta property="og:locale" content="ar_SA">
 <link rel="icon" href="/favicon-32.png">
@@ -146,7 +172,7 @@ for (const unit of units) {
     inLanguage: "ar",
     author: unit.author === "فريق وضوح" ? { "@type": "Organization", name: "وضوح", url: SITE } : { "@type": "Person", name: unit.author },
     publisher: { "@type": "Organization", name: "وضوح", url: SITE, logo: { "@type": "ImageObject", url: `${SITE}/icon-512.png` } },
-    mainEntityOfPage: `${SITE}${path}`,
+    mainEntityOfPage: href(path),
     articleSection: unit.category,
     dateModified: unit.modified || today,
   };
@@ -167,6 +193,18 @@ ${markdown(unit.body)}
 ` + foot;
   mkdirSync(join(dir, unit.slug), { recursive: true });
   writeFileSync(join(dir, unit.slug, "index.html"), html);
+  // الرابط القديم بالرمز يبقى ويحوّل إلى الجديد، حتى لا ينكسر رابط شاركه أحد.
+  if (unit.code !== unit.slug) {
+    mkdirSync(join(dir, unit.code), { recursive: true });
+    writeFileSync(join(dir, unit.code, "index.html"), `<!doctype html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<title>${esc(unit.heading)} | وضوح</title>
+<link rel="canonical" href="${href(path)}">
+<meta name="robots" content="noindex">
+<meta http-equiv="refresh" content="0; url=${path}">
+</head><body><p>انتقل المقال إلى <a href="${path}">${esc(unit.heading)}</a>.</p></body></html>
+`);
+  }
 }
 
 const indexLd = { "@context": "https://schema.org", "@type": "CollectionPage", name: "مركز المعرفة | وضوح", inLanguage: "ar", url: `${SITE}/knowledge/` };
@@ -188,7 +226,7 @@ ${units.filter((u) => u.category === c).map((u) => `      <a class="card" href="
 const urls = ["/", "/knowledge/", ...units.map((u) => `/knowledge/${u.slug}/`), "/privacy.html", "/terms.html"];
 writeFileSync(join(root, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls.map((u) => `  <url><loc>${SITE}${u}</loc><lastmod>${u.includes("privacy") || u.includes("terms") ? "2026-09-25" : (units.find((x) => u === `/knowledge/${x.slug}/`)?.modified || today)}</lastmod></url>`).join("\n")}
+${urls.map((u) => `  <url><loc>${href(u)}</loc><lastmod>${u.includes("privacy") || u.includes("terms") ? "2026-09-25" : (units.find((x) => u === `/knowledge/${x.slug}/`)?.modified || today)}</lastmod></url>`).join("\n")}
 </urlset>
 `);
 // شريط «اقرأ قبل أن تبدأ» في الرئيسية: أول ثلاث مقالات منشورة، حتى لا يشير لمقال غير موجود.
