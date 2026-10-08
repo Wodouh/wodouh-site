@@ -36,9 +36,9 @@ jobs:
       - name: Commit when something changed
         run: |
           # تاريخ اليوم في خريطة الموقع وحده لا يستحق نشرًا جديدًا.
-          if [ -z "$(git status --porcelain -- knowledge index.html)" ]; then git checkout -- sitemap.xml; echo "لا تغيير"; exit 0; fi
+          if [ -z "$(git status --porcelain -- knowledge index.html tools/article-urls.json)" ]; then git checkout -- sitemap.xml; echo "لا تغيير"; exit 0; fi
           git config user.name "wodouh-knowledge-sync"
           git config user.email "hello@wodouh.com"
-          git add knowledge sitemap.xml index.html
+          git add knowledge sitemap.xml index.html tools/article-urls.json
           git commit -m "مزامنة مركز المعرفة من المنصة"
           git push
