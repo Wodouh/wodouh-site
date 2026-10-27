@@ -130,6 +130,8 @@ const head = (title, description, path, extra = "") => `<!doctype html>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Noto+Kufi+Arabic:wght@600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/knowledge/knowledge.css">
 ${extra}
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R8KWM7J60G"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-R8KWM7J60G');</script>
 </head>
 <body>
 <header>
